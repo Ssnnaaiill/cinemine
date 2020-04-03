@@ -1,7 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
+import GlobalStyle from "./components/GlobalStyle";
 
-function App() {
-  return <div className="App">cinemine</div>;
+class App extends Component {
+  render() {
+    return (
+      <>
+        <GlobalStyle />
+      </>
+    );
+  }
 }
 
 export default App;
