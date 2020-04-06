@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Loading, Message, Poster, Section } from "../../components";
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin: 30rem auto;
+`;
 
 interface IProps {
   nowPlaying: any[] | null;
@@ -18,7 +20,7 @@ export const HomePresenter: SFC<IProps> = ({
   popular,
   upcoming,
   error,
-  loading
+  loading,
 }) => (
   <>
     <Helmet>
@@ -30,7 +32,7 @@ export const HomePresenter: SFC<IProps> = ({
       <Container>
         {nowPlaying && nowPlaying.length !== 0 && (
           <Section title="Now Playing">
-            {nowPlaying.map(movie => (
+            {nowPlaying.map((movie) => (
               <Poster
                 key={movie.id}
                 title={movie.title}
@@ -44,7 +46,7 @@ export const HomePresenter: SFC<IProps> = ({
         )}
         {popular && popular.length !== 0 && (
           <Section title="Popular">
-            {popular.map(movie => (
+            {popular.map((movie) => (
               <Poster
                 key={movie.id}
                 title={movie.title}
@@ -58,7 +60,7 @@ export const HomePresenter: SFC<IProps> = ({
         )}
         {upcoming && upcoming.length !== 0 && (
           <Section title="Upcoming">
-            {upcoming.map(movie => (
+            {upcoming.map((movie) => (
               <Poster
                 key={movie.id}
                 title={movie.title}

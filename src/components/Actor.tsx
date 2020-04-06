@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import Avatar from "../asset/avatar.png";
 
 const Container = styled.div`
@@ -71,7 +70,6 @@ class Actor extends Component<IProps> {
     const {
       people: { credit_id, character, name, profile_path },
     } = this.props;
-
     return (
       <Link to={`/credit/${credit_id}`}>
         <Container>

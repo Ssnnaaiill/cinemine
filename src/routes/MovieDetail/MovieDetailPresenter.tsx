@@ -341,7 +341,7 @@ export const MovieDetailPresenter: SFC<IProps> = ({
   ) : (
     <Container>
       <Helmet>
-        <title>{result.title} | Cinephile</title>
+        <title>{result.title} | Cinemine</title>
       </Helmet>
       <Backdrop
         imageUrl={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}

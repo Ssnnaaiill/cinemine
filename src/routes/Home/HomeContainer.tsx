@@ -15,13 +15,13 @@ class HomeContainer extends Component {
     try {
       const {
         data: { results: nowPlaying },
-      } = await movieApi.nowPlaying();
+      } = await movieApi.nowPlaying(1);
       const {
         data: { results: popular },
-      } = await movieApi.popular();
+      } = await movieApi.popular(1);
       const {
         data: { results: upcoming },
-      } = await movieApi.upcoming();
+      } = await movieApi.upcoming(1);
       this.setState({ nowPlaying, popular, upcoming, loading: true });
     } catch (error) {
       this.setState({
@@ -36,7 +36,6 @@ class HomeContainer extends Component {
 
   render() {
     const { nowPlaying, upcoming, popular, error, loading } = this.state;
-    console.log(this.state);
     return (
       <HomePresenter
         nowPlaying={nowPlaying}
