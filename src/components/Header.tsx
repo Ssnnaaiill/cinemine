@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../asset/logo.png";
+// import Logo from "../asset/logo.png";
 
 const GradientBackground = styled.div`
   top: 0;
@@ -50,11 +50,11 @@ const NavList = styled.ul`
   justify-content: center;
 `;
 
-const LogoImage = styled.img`
-  height: 50px;
-  position: relative;
-  z-index: 2;
-`;
+// const LogoImage = styled.img`
+//   height: 50px;
+//   position: relative;
+//   z-index: 2;
+// `;
 
 interface IItemProps {
   current: boolean;
@@ -85,9 +85,7 @@ export default withRouter(({ location: { pathname } }) => (
   <Header>
     <GradientBackground />
     <List>
-      <Link to={"/"}>
-        <LogoImage src={Logo} />
-      </Link>
+      <Link to={"/"}></Link>
       <NavList>
         <Item current={pathname === "/"}>
           <SLink to="/">영화</SLink>
