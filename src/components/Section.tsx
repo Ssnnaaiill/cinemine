@@ -2,6 +2,8 @@ import React, { SFC } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
+  position: relative;
+  z-index: 2;
   :not(:last-child) {
     margin-bottom: 3rem;
   }
