@@ -23,7 +23,7 @@ export const SearchPresenter = ({
   error,
   loading,
   handleSubmit,
-  handleOnChangeTerm
+  handleOnChangeTerm,
 }) => (
   <Container>
     <Form onSubmit={handleSubmit}>
@@ -39,7 +39,7 @@ export const SearchPresenter = ({
       <>
         {movieResults && movieResults.length !== 0 && (
           <Section title="Movie Results">
-            {movieResults.map(movie => (
+            {movieResults.map((movie) => (
               <Poster
                 key={movie.id}
                 title={movie.title}
@@ -54,7 +54,7 @@ export const SearchPresenter = ({
         )}
         {tvResults && tvResults.length !== 0 && (
           <Section title="TV Show Results">
-            {tvResults.map(show => (
+            {tvResults.map((show) => (
               <Poster
                 key={show.id}
                 id={show.id}
@@ -86,5 +86,5 @@ SearchPresenter.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  handleOnChangeTerm: PropTypes.func.isRequired
+  handleOnChangeTerm: PropTypes.func.isRequired,
 };

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { SearchPresenter } from "./SearchPresenter";
-import { movieApi, tvApi } from "../../api";
+import { movieApi } from "../../api";
 
 class SearchContainer extends Component {
   state = {
@@ -8,10 +8,10 @@ class SearchContainer extends Component {
     tvResults: null,
     searchTerm: "",
     error: null,
-    loading: false
+    loading: false,
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const { searchTerm } = this.state;
     if (searchTerm !== "") {
@@ -19,9 +19,9 @@ class SearchContainer extends Component {
     }
   };
 
-  handleOnChangeTerm = event => {
+  handleOnChangeTerm = (event) => {
     const {
-      target: { value }
+      target: { value },
     } = event;
     this.setState({ searchTerm: value });
   };
@@ -31,13 +31,12 @@ class SearchContainer extends Component {
     this.setState({ loading: true });
     try {
       const {
-        data: { results: movieResults }
+        data: { results: movieResults },
       } = await movieApi.search(searchTerm);
-      const {
-        data: { results: tvResults }
-      } = await tvApi.search(searchTerm);
-      console.log(movieResults, tvResults);
-      this.setState({ movieResults, tvResults });
+      // const {
+      //   data: { results: tvResults },
+      // } = await tvApi.search(searchTerm);
+      this.setState({ movieResults });
     } catch (error) {
       this.setState({ error: error.message });
     } finally {
