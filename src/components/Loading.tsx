@@ -10,7 +10,7 @@ const Container = styled.div`
   margin-top: 1.5rem;
 `;
 
-export const Loader: SFC = () => (
+export const Loading: SFC = () => (
   <Container>
     <span role="img" aria-label="loading">
       ⏳
