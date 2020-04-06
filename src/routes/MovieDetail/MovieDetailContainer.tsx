@@ -15,8 +15,15 @@ interface IProps {
 
 interface IState {
   result: any;
-  credit: any;
+  cast: any;
   directors: any;
+  producers: any;
+  writers: any;
+  editors: any;
+  cinematographies: any;
+  productionDesigns: any;
+  composers: any;
+  costumes: any;
   creditIndex: number;
   error: string | null;
   loading: boolean;
@@ -25,13 +32,21 @@ interface IState {
 class MovieDetailContainer extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
+
     this.state = {
       result: null,
-      credit: null,
+      cast: null,
       directors: null,
-      creditIndex: 0,
+      producers: null,
+      writers: null,
+      editors: null,
+      cinematographies: null,
+      productionDesigns: null,
+      composers: null,
+      costumes: null,
+      creditIndex: 2,
       error: null,
-      loading: true
+      loading: true,
     };
   }
 
@@ -39,21 +54,58 @@ class MovieDetailContainer extends Component<IProps, IState> {
     try {
       const {
         match: {
-          params: { id }
+          params: { id },
         },
-        history: { push }
+        history: { push },
       } = this.props;
       const parsedId = parseInt(id);
       if (isNaN(parsedId)) {
         return push("/");
       }
+
       try {
         const { data: result } = await movieApi.detail(parsedId);
         const { data: credit } = await movieApi.credit(parsedId);
-        const directors = credit.crew.filter(
-          (credit: any) => credit.job === "Director"
+        const { cast } = credit;
+        const { crew } = credit;
+        const directors = crew.filter(
+          (people: any) => people.department === "Directing"
         );
-        this.setState({ result, credit, directors, loading: true });
+        const producers = crew.filter(
+          (people: any) => people.department === "Production"
+        );
+        const writers = crew.filter(
+          (people: any) => people.department === "Writing"
+        );
+        const editors = crew.filter(
+          (people: any) => people.department === "Editing"
+        );
+        const cinematographies = crew.filter(
+          (people: any) => people.department === "Camera"
+        );
+        const productionDesigns = crew.filter(
+          (people: any) => people.department === "Art"
+        );
+        const composers = crew.filter(
+          (people: any) => people.department === "Sound"
+        );
+        const costumes = crew.filter(
+          (people: any) => people.department === "Costume & Make-Up"
+        );
+
+        this.setState({
+          result,
+          cast,
+          directors,
+          producers,
+          writers,
+          editors,
+          cinematographies,
+          productionDesigns,
+          composers,
+          costumes,
+          loading: true,
+        });
       } catch (error) {
         this.setState({ error: error.message });
       } finally {
@@ -74,23 +126,32 @@ class MovieDetailContainer extends Component<IProps, IState> {
   render() {
     const {
       result,
-      credit,
+      cast,
       directors,
+      producers,
+      writers,
+      editors,
+      cinematographies,
+      productionDesigns,
+      composers,
+      costumes,
       creditIndex,
       error,
-      loading
+      loading,
     } = this.state;
-    console.log(
-      this.state.result,
-      this.state.credit && this.state.credit.cast,
-      this.state.credit && this.state.credit.crew
-    );
 
     return (
       <MovieDetailPresenter
         result={result}
-        credit={credit}
+        cast={cast}
         directors={directors}
+        producers={producers}
+        writers={writers}
+        editors={editors}
+        cinematographies={cinematographies}
+        productionDesigns={productionDesigns}
+        composers={composers}
+        costumes={costumes}
         creditIndex={creditIndex}
         error={error}
         loading={loading}

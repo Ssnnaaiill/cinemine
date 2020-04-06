@@ -8,36 +8,40 @@ class HomeContainer extends Component {
     popular: null,
     upcoming: null,
     error: null,
-    loading: true
+    loading: true,
   };
 
   async componentDidMount() {
     try {
       const {
-        data: { results: nowPlaying }
+        data: { results: nowPlaying },
       } = await movieApi.nowPlaying();
       const {
-        data: { results: popular }
+        data: { results: popular },
       } = await movieApi.popular();
       const {
-        data: { results: upcoming }
+        data: { results: upcoming },
       } = await movieApi.upcoming();
       this.setState({ nowPlaying, popular, upcoming, loading: true });
     } catch (error) {
-      this.setState({ error: error.message });
+      this.setState({
+        error: error.message,
+      });
     } finally {
-      this.setState({ loading: false });
+      this.setState({
+        loading: false,
+      });
     }
   }
 
   render() {
-    const { nowPlaying, popular, upcoming, error, loading } = this.state;
-
+    const { nowPlaying, upcoming, popular, error, loading } = this.state;
+    console.log(this.state);
     return (
       <HomePresenter
         nowPlaying={nowPlaying}
-        popular={popular}
         upcoming={upcoming}
+        popular={popular}
         error={error}
         loading={loading}
       />

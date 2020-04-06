@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const Text = styled.span`
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;
 
 interface IProps {
@@ -16,7 +16,7 @@ interface IProps {
   color: string;
 }
 
-export const Message: React.SFC<IProps> = ({ text, color }) => (
+export const Message: SFC<IProps> = ({ text, color }) => (
   <Container>
     <Text color={color}>{text}</Text>
   </Container>

@@ -1,17 +1,18 @@
 import React, { SFC } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import NoImage from "../asset/popcorn.png";
 
 const Container = styled.div`
   font-size: 0.8rem;
 `;
 
 interface IImageProps {
-  imageUrl: string;
+  bgUrl: string;
 }
 
 const Image = styled("div")<IImageProps>`
-  background: url(${props => props.imageUrl});
+  background: url(${(props) => props.bgUrl});
   height: 11rem;
   background-size: cover;
   border-radius: 0.3rem;
@@ -57,30 +58,20 @@ interface IProps {
   title: string;
   rating: number;
   year: string;
-  isMovie?: boolean;
 }
 
-export const Poster: SFC<IProps> = ({
-  id,
-  imageUrl,
-  title,
-  rating,
-  year,
-  isMovie = false
-}) => (
-  <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
+export const Poster: SFC<IProps> = ({ id, imageUrl, title, rating, year }) => (
+  <Link to={`/film/${id}`}>
     <Container>
       <ImageContainer>
         <Image
-          imageUrl={
-            imageUrl
-              ? `https://image.tmdb.org/t/p/w300${imageUrl}`
-              : "" /* NoImage */
+          bgUrl={
+            imageUrl ? `https://image.tmdb.org/t/p/w300${imageUrl}` : NoImage
           }
         />
         <Rating>
           <span role="img" aria-label="rating" style={{ color: "goldenrod" }}>
-            ⭐{" "}
+            ★{" "}
           </span>
           {rating}
         </Rating>
