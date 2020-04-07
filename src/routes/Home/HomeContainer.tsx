@@ -2,27 +2,28 @@ import React, { Component } from "react";
 import { HomePresenter } from "./HomePresenter";
 import { movieApi } from "../../api";
 
-class HomeContainer extends Component {
+interface IState {
+  movies: any;
+  error: string | null;
+  loading: boolean;
+}
+
+class HomeContainer extends Component<{}, IState> {
   state = {
-    nowPlaying: null,
-    popular: null,
-    upcoming: null,
+    movies: null,
     error: null,
-    loading: true,
+    loading: false,
   };
 
   async componentDidMount() {
     try {
       const {
-        data: { results: nowPlaying },
-      } = await movieApi.nowPlaying(1);
-      const {
-        data: { results: popular },
+        data: { results: movies },
       } = await movieApi.popular(1);
-      const {
-        data: { results: upcoming },
-      } = await movieApi.upcoming(1);
-      this.setState({ nowPlaying, popular, upcoming, loading: true });
+      this.setState({
+        movies: movies.slice(0, 10),
+        loading: true,
+      });
     } catch (error) {
       this.setState({
         error: error.message,
@@ -33,18 +34,9 @@ class HomeContainer extends Component {
       });
     }
   }
-
   render() {
-    const { nowPlaying, upcoming, popular, error, loading } = this.state;
-    return (
-      <HomePresenter
-        nowPlaying={nowPlaying}
-        upcoming={upcoming}
-        popular={popular}
-        error={error}
-        loading={loading}
-      />
-    );
+    const { movies, error, loading } = this.state;
+    return <HomePresenter movies={movies} error={error} loading={loading} />;
   }
 }
 

@@ -1,79 +1,40 @@
 import React, { SFC } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
-import { Loading, Message, Poster, Section } from "../../components";
+
+import { Loading, Section } from "../../components";
+import { movieApi } from "../../api";
 
 const Container = styled.div`
-  margin: 30rem auto;
+  margin: 5rem 0 10rem 0;
+`;
+
+const SectionContainer = styled.div`
+  width: 55.5rem;
+  margin: 0 auto;
 `;
 
 interface IProps {
-  nowPlaying: any[] | null;
-  popular: any[] | null;
-  upcoming: any[] | null;
+  movies: any;
   error: string | null;
   loading: boolean;
 }
 
-export const HomePresenter: SFC<IProps> = ({
-  nowPlaying,
-  popular,
-  upcoming,
-  error,
-  loading,
-}) => (
-  <>
-    <Helmet>
-      <title>Film | Cinemine </title>
-    </Helmet>
-    {loading ? (
-      <Loading />
-    ) : (
+export const HomePresenter: SFC<IProps> = ({ movies, error, loading }) =>
+  loading ? (
+    <Loading />
+  ) : (
+    <>
+      <Helmet>
+        <title>Home | Cinemine</title>
+      </Helmet>
       <Container>
-        {nowPlaying && nowPlaying.length !== 0 && (
-          <Section title="Now Playing">
-            {nowPlaying.map((movie) => (
-              <Poster
-                key={movie.id}
-                title={movie.title}
-                id={movie.id}
-                imageUrl={movie.poster_path}
-                rating={movie.vote_average}
-                year={movie.release_date && movie.release_date.substring(0, 4)}
-              />
-            ))}
-          </Section>
-        )}
-        {popular && popular.length !== 0 && (
-          <Section title="Popular">
-            {popular.map((movie) => (
-              <Poster
-                key={movie.id}
-                title={movie.title}
-                id={movie.id}
-                imageUrl={movie.poster_path}
-                rating={movie.vote_average}
-                year={movie.release_date && movie.release_date.substring(0, 4)}
-              />
-            ))}
-          </Section>
-        )}
-        {upcoming && upcoming.length !== 0 && (
-          <Section title="Upcoming">
-            {upcoming.map((movie) => (
-              <Poster
-                key={movie.id}
-                title={movie.title}
-                id={movie.id}
-                imageUrl={movie.poster_path}
-                rating={movie.vote_average}
-                year={movie.release_date && movie.release_date.substring(0, 4)}
-              />
-            ))}
-          </Section>
-        )}
-        {error && <Message color="#e74c3c" text={error} />}
+        <SectionContainer>
+          <Section title="현재 상영중" getAPI={movieApi.nowPlaying} />
+          <Section title="인기 작품" getAPI={movieApi.popular} />
+          <Section title="개봉 예정작" getAPI={movieApi.upcoming} />
+          <Section title="최고 평점작" getAPI={movieApi.topRated} />
+        </SectionContainer>
       </Container>
-    )}
-  </>
-);
+    </>
+  );
