@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
-import { Rate } from "antd";
 
 import { Credit, Loading } from "../../components";
 import NoImage from "../../asset/popcorn.png";
@@ -225,84 +224,6 @@ const Divider = styled.span`
   margin: 0 0.2rem;
 `;
 
-const Sidebar = styled.aside`
-  padding-bottom: 3rem;
-  width: 15rem;
-`;
-
-const UserPanel = styled.ul`
-  margin-bottom: 1.5rem;
-  font-size: 0.8rem;
-  color: #bcd;
-`;
-
-const UserActionContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const UserAction = styled.li`
-  padding: 1rem 0;
-  width: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: #456;
-  margin-bottom: 1px;
-`;
-
-const UserActionIcon = styled.i`
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-`;
-
-const UserActionText = styled.span``;
-
-const RatingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0;
-  margin-bottom: 1px;
-  background-color: #456;
-`;
-
-const RatingText = styled.span`
-  margin-bottom: 0.2rem;
-`;
-
-const AddReview = styled.div`
-  background-color: #456;
-  padding: 1rem 0;
-  margin-bottom: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const AddList = styled.div`
-  background-color: #456;
-  padding: 1rem 0;
-  margin-bottom: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Share = styled.div`
-  background-color: #456;
-  padding: 1rem 0;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 interface IProps {
   result: any;
   cast: any;
@@ -439,34 +360,6 @@ export const MovieDetailPresenter: SFC<IProps> = ({
               </Link>
             </MoreService>
           </Watch>
-          <Sidebar>
-            <UserPanel>
-              <UserActionContainer>
-                <UserAction style={{ borderTopLeftRadius: 4 }}>
-                  <UserActionIcon className="far fa-eye" />
-                  <UserActionText>봤어요</UserActionText>
-                </UserAction>
-                <UserAction>
-                  <UserActionIcon className="far fa-heart" />
-                  <UserActionText>좋아요</UserActionText>
-                </UserAction>
-                <UserAction style={{ borderTopRightRadius: 4 }}>
-                  <UserActionIcon className="far fa-clock" />
-                  <UserActionText>보고싶어요</UserActionText>
-                </UserAction>
-              </UserActionContainer>
-              <RatingContainer>
-                <RatingText>평점</RatingText>
-                <Rate
-                  style={{ fontSize: 30, color: "goldenrod", marginLeft: 10 }}
-                  allowHalf
-                />
-              </RatingContainer>
-              <AddReview>리뷰 작성</AddReview>
-              <AddList>컬렉션 추가</AddList>
-              <Share>공유</Share>
-            </UserPanel>
-          </Sidebar>
         </MediaInfo>
         <TextInfo>
           <TitleSection>
