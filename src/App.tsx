@@ -1,13 +1,31 @@
 import React, { Component } from "react";
-import GlobalStyle from "./components/GlobalStyle";
 import { Router } from "./components/Router";
+import GlobalStyle from "./components/GlobalStyle";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
-class App extends Component {
+interface IProps {
+  data: any;
+}
+
+class App extends Component<IProps, any> {
   render() {
+    const {
+      data: {
+        auth: { isLoggedIn },
+      },
+    } = this.props;
     return (
       <>
-        <Router />
+        <Router isLoggedIn={isLoggedIn} />
         <GlobalStyle />
+        <ToastContainer
+          draggable={true}
+          position={"top-left"}
+          autoClose={5000}
+          hideProgressBar={true}
+          pauseOnHover={true}
+        />
       </>
     );
   }
