@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 0.5rem;
-  width: 42rem;
+  width: 21rem;
   overflow: hidden;
 `;
 
@@ -68,10 +68,10 @@ interface IProps {
 class Actor extends Component<IProps> {
   render() {
     const {
-      people: { credit_id, character, name, profile_path },
+      people: { id, character, name, profile_path },
     } = this.props;
     return (
-      <Link to={`/credit/${credit_id}`}>
+      <Link to={`/person/${id}`}>
         <Container>
           {profile_path ? (
             <ProfileImage
@@ -82,7 +82,7 @@ class Actor extends Component<IProps> {
           )}
           <TextContainer>
             <Name>{name}</Name>
-            <Character>{character} 역</Character>
+            {character && <Character>{character} 역</Character>}
           </TextContainer>
         </Container>
       </Link>
